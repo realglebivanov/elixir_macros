@@ -12,20 +12,33 @@ defmodule ElixirTest do
 
   def test_markup(dependency) do
     markup do
-      div(class: "row") do
-        h1 do
-          text do: "Some random title"
-        end
-
-        if dependency != nil do
-          p do
-            text do: "WHOA"
+      doctype!()
+      html do
+        head do
+          title do
+            text do: "Random page title"
           end
         end
 
-        for i <- 1..5 do
-          p do
-            text do: "#{dependency + i}. Just trying things out"
+        hr(class: "defmacro")
+
+        body do
+          div(class: "row") do
+            h1 do
+              text do: "Some random title"
+            end
+
+            unless is_nil(dependency) do
+              p do
+                text do: "WHOA"
+              end
+            end
+
+            for i <- 1..5 do
+              p(id: "p-line-#{i}", class: "line") do
+                text do: "#{dependency + i}. Just trying things out"
+              end
+            end
           end
         end
       end

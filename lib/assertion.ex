@@ -41,7 +41,7 @@ defmodule Assertion do
   defmacro test(name, do: block) do
     function_name = String.to_atom(name)
 
-    quote  do
+    quote do
       @tests unquote(function_name)
       def unquote(function_name)(), do: unquote(block)
     end
